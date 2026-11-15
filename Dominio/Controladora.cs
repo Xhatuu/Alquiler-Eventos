@@ -5,6 +5,8 @@
         private static List<Equipo> aListaEquipos = new List<Equipo>();
         private static List<Cliente> aListaClientes = new List<Cliente>();
 
+        private static List<Solicitud> aListaSolicitudes = new List<Solicitud>();
+
         #region Equipos
 
         public List<Equipo> ListarEquipos()
@@ -103,6 +105,63 @@
                 ClienteAModificar.Apellido = pApellido;
                 ClienteAModificar.Direccion = pDireccion;
                 ClienteAModificar.Telefono = pTelefono;
+                return true;
+            }
+            return false;
+        }
+        #endregion
+
+        #region Solicitudes
+
+        public List<Solicitud> ListarSolicitudes()
+        {
+            return aListaSolicitudes;
+        }
+        public Solicitud BuscarSolicitud(int pId)
+        {
+            foreach (Solicitud unaSolicitud in aListaSolicitudes)
+            {
+                if (unaSolicitud.Id == pId)
+                {
+                    return unaSolicitud;
+                }
+            }
+            return null;
+        }
+        public bool AltaSolicitud(Solicitud pSolicitud)
+        {
+            Solicitud ComparoSolicitud = BuscarSolicitud(pSolicitud.Id);
+            if (ComparoSolicitud == null)
+            {
+                aListaSolicitudes.Add(pSolicitud);
+                return true;
+            }
+            return false;
+        }
+        public bool BajaSolicitud(int pId)
+        {
+            Solicitud SolicitudAEliminar = BuscarSolicitud(pId);
+            if (SolicitudAEliminar != null)
+            {
+                aListaSolicitudes.Remove(SolicitudAEliminar);
+                return true;
+            }
+            return false;
+        }
+        public bool ModificarSolicitud(int pId, Cliente pCliente, string pTipoEvento, DateTime pFechaEvento, string pUbicacion, DateTime pHorarioInicio, DateTime pHorarioFin, int pCantidadAsistentes, string pEstado, List<Equipo> pEquipos)
+        {
+            Solicitud SolicitudAModificar = BuscarSolicitud(pId);
+            if (SolicitudAModificar != null)
+            {
+                SolicitudAModificar.Cliente = pCliente;
+                SolicitudAModificar.TipoEvento = pTipoEvento;
+                SolicitudAModificar.FechaEvento = pFechaEvento;
+                SolicitudAModificar.Ubicacion = pUbicacion;
+                SolicitudAModificar.HorarioInicio = pHorarioInicio;
+                SolicitudAModificar.HorarioFin = pHorarioFin;
+                SolicitudAModificar.CantidadAsistentes = pCantidadAsistentes;
+                SolicitudAModificar.Estado = pEstado;
+                SolicitudAModificar.Equipos = pEquipos;
                 return true;
             }
             return false;
