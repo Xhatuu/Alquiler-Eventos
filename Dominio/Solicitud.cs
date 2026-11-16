@@ -3,52 +3,35 @@
     public class Solicitud
     {
         private int aId;
-        private Cliente aCliente;
-        private string aTipoEvento;
-        private DateTime aFechaEvento;
-        private string aUbicacion;
-        private DateTime aHorarioInicio;
-        private DateTime aHorarioFin;
-        private int aCantidadAsistentes;
+        private DateTime aFecha;
         private string aEstado;
-        private List<Equipo> aEquipos;
-
+        private Cliente aCliente;
+        private Evento aEvento;
+        private string aObservaciones;
         public int Id { get { return aId; } set { aId = value; } }
-        public Cliente Cliente { get { return aCliente; } set { aCliente = value; } }
-        public string TipoEvento { get { return aTipoEvento; } set { aTipoEvento = value; } }
-        public DateTime FechaEvento { get { return aFechaEvento; } set { aFechaEvento = value; } }
-        public string Ubicacion { get { return aUbicacion; } set { aUbicacion = value; } }
-        public DateTime HorarioInicio { get { return aHorarioInicio; } set { aHorarioInicio = value; } }
-        public DateTime HorarioFin { get { return aHorarioFin; } set { aHorarioFin = value; } }
-        public int CantidadAsistentes { get { return aCantidadAsistentes; } set { aCantidadAsistentes = value; } }
+        public DateTime Fecha { get { return aFecha; } set { aFecha = value; } }
         public string Estado { get { return aEstado; } set { aEstado = value; } }
-        public List<Equipo> Equipos { get { return aEquipos; } set { aEquipos = value; } }
+        public Cliente Cliente { get { return aCliente; } set { aCliente = value; } }
+        public Evento Evento { get { return aEvento; } set { aEvento = value; } }
+        public string Observaciones { get { return aObservaciones; } set { aObservaciones = value; } }
 
-        public Solicitud(int pId, Cliente pCliente, string pTipoEvento, DateTime pFechaEvento, string pUbicacion, DateTime pHorarioInicio, DateTime pHorarioFin, int pCantidadAsistentes, string pEstado, List<Equipo> pEquipos)
+        public Solicitud(int pId, DateTime pFecha, string pEstado, Cliente pCliente, Evento pEvento, string pObservaciones)
         {
             aId = pId;
-            aCliente = pCliente;
-            aTipoEvento = pTipoEvento;
-            aFechaEvento = pFechaEvento;
-            aUbicacion = pUbicacion;
-            aHorarioInicio = pHorarioInicio;
-            aHorarioFin = pHorarioFin;
-            aCantidadAsistentes = pCantidadAsistentes;
+            aFecha = pFecha;
             aEstado = pEstado;
-            aEquipos = pEquipos;
+            aCliente = pCliente;
+            aEvento = pEvento;
+            aObservaciones = pObservaciones;
         }
         public Solicitud()
         {
             aId = 0;
-            aCliente = new Cliente();
-            aTipoEvento = "";
-            aFechaEvento = DateTime.Now;
-            aUbicacion = "";
-            aHorarioInicio = DateTime.Now;
-            aHorarioFin = DateTime.Now;
-            aCantidadAsistentes = 0;
+            aFecha = DateTime.Now;
             aEstado = "";
-            aEquipos = new List<Equipo>();
+            aCliente = new Cliente();
+            aEvento = new Evento();
+            aObservaciones = "";
         }
     }
 }

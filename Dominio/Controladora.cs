@@ -2,57 +2,58 @@
 {
     public class Controladora
     {
-        private static List<Equipo> aListaEquipos = new List<Equipo>();
+        private static List<Equipamiento> aListaEquipamientos = new List<Equipamiento>();
         private static List<Cliente> aListaClientes = new List<Cliente>();
 
         private static List<Solicitud> aListaSolicitudes = new List<Solicitud>();
 
         #region Equipos
 
-        public List<Equipo> ListarEquipos()
+        public List<Equipamiento> ListarEquipamientos()
         {
-            return aListaEquipos;
+            return aListaEquipamientos;
         }
-        public Equipo BuscarEquipo(int pId)
+        public Equipamiento BuscarEquipamiento(int pId)
         {
-            foreach (Equipo unEquipo in aListaEquipos)
+            foreach (Equipamiento unEquipamiento in aListaEquipamientos)
             {
-                if(unEquipo.Id == pId)
+                if(unEquipamiento.Id == pId)
                 {
-                    return unEquipo;
+                    return unEquipamiento;
                 }
             }
             return null;
         }
-        public bool AltaEquipo(Equipo pEquipo)
+        public bool AltaEquipamiento(Equipamiento pEquipamiento)
         {
-            Equipo ComparoEquipo = BuscarEquipo(pEquipo.Id);
-            if(ComparoEquipo == null)
+            Equipamiento ComparoEquipamiento = BuscarEquipamiento(pEquipamiento.Id);
+            if(ComparoEquipamiento == null)
             {
-                aListaEquipos.Add(pEquipo);
+                aListaEquipamientos.Add(pEquipamiento);
                 return true;
             }
             return false;
         }
-        public bool BajaEquipo(int pId)
+        public bool BajaEquipamiento(int pId)
         {
-            Equipo EquipoAEliminar = BuscarEquipo(pId);
-            if(EquipoAEliminar != null)
+            Equipamiento EquipamientoAEliminar = BuscarEquipamiento(pId);
+            if(EquipamientoAEliminar != null)
             {
-                aListaEquipos.Remove(EquipoAEliminar);
+                aListaEquipamientos.Remove(EquipamientoAEliminar);
                 return true;
             }
             return false;
         }
-        public bool ModificarEquipo(int pId, string pNombre, string pTipo, string pEstado, string pDeposito)
+        public bool ModificarEquipamiento(int pId, string pCodigo, string pEstado, Deposito pDeposito, TipoEquipamiento pTipoEquipamiento, string pObservaciones)
         {
-            Equipo EquipoAModificar = BuscarEquipo(pId);
-            if(EquipoAModificar != null)
+            Equipamiento EquipamientoAModificar = BuscarEquipamiento(pId);
+            if(EquipamientoAModificar != null)
             {
-                EquipoAModificar.Nombre = pNombre;
-                EquipoAModificar.Tipo = pTipo;
-                EquipoAModificar.Estado = pEstado;
-                EquipoAModificar.Deposito = pDeposito;
+                EquipamientoAModificar.Codigo = pCodigo;
+                EquipamientoAModificar.Estado = pEstado;
+                EquipamientoAModificar.Deposito = pDeposito;
+                EquipamientoAModificar.TipoEquipamiento = pTipoEquipamiento;
+                EquipamientoAModificar.Observaciones = pObservaciones;
                 return true;
             }
             return false;
@@ -96,15 +97,18 @@
             }
             return false;
         }
-        public bool ModificarCliente(int pId, string pNombre, string pApellido, string pDireccion, string pTelefono)
+        public bool ModificarCliente(int pId, string pNombre, string pTipo, string pDocumento, string pDireccion, string pTelefono, string pEmail, bool pActivo)
         {
             Cliente ClienteAModificar = BuscarCliente(pId);
             if (ClienteAModificar != null)
             {
                 ClienteAModificar.Nombre = pNombre;
-                ClienteAModificar.Apellido = pApellido;
+                ClienteAModificar.Tipo = pTipo;
+                ClienteAModificar.Documento = pDocumento;
                 ClienteAModificar.Direccion = pDireccion;
                 ClienteAModificar.Telefono = pTelefono;
+                ClienteAModificar.Email = pEmail;
+                ClienteAModificar.Activo = pActivo;
                 return true;
             }
             return false;
@@ -148,20 +152,16 @@
             }
             return false;
         }
-        public bool ModificarSolicitud(int pId, Cliente pCliente, string pTipoEvento, DateTime pFechaEvento, string pUbicacion, DateTime pHorarioInicio, DateTime pHorarioFin, int pCantidadAsistentes, string pEstado, List<Equipo> pEquipos)
+        public bool ModificarSolicitud(int pId, DateTime pFecha, string pEstado, Cliente pCliente, Evento pEvento, string pObservaciones)
         {
             Solicitud SolicitudAModificar = BuscarSolicitud(pId);
             if (SolicitudAModificar != null)
             {
-                SolicitudAModificar.Cliente = pCliente;
-                SolicitudAModificar.TipoEvento = pTipoEvento;
-                SolicitudAModificar.FechaEvento = pFechaEvento;
-                SolicitudAModificar.Ubicacion = pUbicacion;
-                SolicitudAModificar.HorarioInicio = pHorarioInicio;
-                SolicitudAModificar.HorarioFin = pHorarioFin;
-                SolicitudAModificar.CantidadAsistentes = pCantidadAsistentes;
+                SolicitudAModificar.Fecha = pFecha;
                 SolicitudAModificar.Estado = pEstado;
-                SolicitudAModificar.Equipos = pEquipos;
+                SolicitudAModificar.Cliente = pCliente;
+                SolicitudAModificar.Evento = pEvento;
+                SolicitudAModificar.Observaciones = pObservaciones;
                 return true;
             }
             return false;
