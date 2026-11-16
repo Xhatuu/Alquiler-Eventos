@@ -15,9 +15,12 @@
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
-                <th>Apellido</th>
+                <th>Tipo</th>
+                <th>Documento</th>
                 <th>Dirección</th>
                 <th>Teléfono</th>
+                <th>Email</th>
+                <th>Activo</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -29,9 +32,12 @@
                     <tr>
                         <td>@unCli.Id</td>
                         <td>@unCli.Nombre</td>
-                        <td>@unCli.Apellido</td>
+                        <td>@unCli.Tipo</td>
+                        <td>@unCli.Documento</td>
                         <td>@unCli.Direccion</td>
                         <td>@unCli.Telefono</td>
+                        <td>@unCli.Email</td>
+                        <td>@unCli.Activo</td>
                         <td>
                             <div>
                                 <a class="btn btn-primary" asp-page="./Modificar" asp-route-id="@unCli.Id">

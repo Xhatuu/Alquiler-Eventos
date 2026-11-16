@@ -9,9 +9,12 @@ namespace Alquiler_Eventos.Pages.PageCliente
         public Cliente cliente { get; set; } = new Cliente();
         [BindProperty] public int id { get; set; }
         [BindProperty] public string nombre { get; set; } = "";
-        [BindProperty] public string apellido { get; set; } = "";
+        [BindProperty] public string tipo { get; set; } = "";
+        [BindProperty] public string documento { get; set; } = "";
         [BindProperty] public string direccion { get; set; } = "";
         [BindProperty] public string telefono { get; set; } = "";
+        [BindProperty] public string email { get; set; } = "";
+        [BindProperty] public bool activo { get; set; }
         public string Mensaje { get; set; } = "";
         public void OnGet(int id)
         {
@@ -21,9 +24,12 @@ namespace Alquiler_Eventos.Pages.PageCliente
             {
                 this.id = cliente.Id;
                 nombre = cliente.Nombre;
-                apellido = cliente.Apellido;
+                tipo = cliente.Tipo;
+                documento = cliente.Documento;
                 direccion = cliente.Direccion;
                 telefono = cliente.Telefono;
+                email = cliente.Email;
+                activo = cliente.Activo;
             }
             else
             {
@@ -50,9 +56,13 @@ namespace Alquiler_Eventos.Pages.PageCliente
                 {
                     throw new Exception("Debe ingresar el Nombre del Cliente");
                 }
-                if (Request.Form["apellido"] == "")
+                if (Request.Form["tipo"] == "")
                 {
-                    throw new Exception("Debe ingresar el Apellido del Cliente");
+                    throw new Exception("Debe ingresar el tipo del Cliente");
+                }
+                if (Request.Form["documento"] == "")
+                {
+                    throw new Exception("Debe ingresar el documento del Cliente");
                 }
                 if (Request.Form["direccion"] == "")
                 {
@@ -62,16 +72,23 @@ namespace Alquiler_Eventos.Pages.PageCliente
                 {
                     throw new Exception("Debe ingresar el Teléfono del Cliente");
                 }
+                if (Request.Form["email"] == "")
+                {
+                    throw new Exception("Debe ingresar el Email del Cliente");
+                }
 
                 int Id = int.Parse(Request.Form["id"]);
                 string Nombre = Request.Form["nombre"];
-                string Apellido = Request.Form["apellido"];
+                string Tipo = Request.Form["tipo"];
+                string Documento = Request.Form["documento"];
                 string Direccion = Request.Form["direccion"];
                 string Telefono = Request.Form["telefono"];
+                string Email = Request.Form["email"];
+                bool Activo = Request.Form["activo"] == "on";
 
                 Controladora unaControladora = new Controladora();
 
-                if (!unaControladora.ModificarCliente(Id, Nombre, Apellido, Direccion, Telefono))
+                if (!unaControladora.ModificarCliente(Id, Nombre, Tipo, Documento, Direccion, Telefono, Email, Activo))
                 {
                     throw new Exception("El Cliente no existe");
                 }

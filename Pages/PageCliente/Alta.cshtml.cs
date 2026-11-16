@@ -8,9 +8,12 @@ namespace Alquiler_Eventos.Pages.PageCliente
     {
         [BindProperty] public string id { get; set; } = "";
         [BindProperty] public string nombre { get; set; } = "";
-        [BindProperty] public string apellido { get; set; } = "";
+        [BindProperty] public string tipo { get; set; } = "";
+        [BindProperty] public string documento { get; set; } = "";
         [BindProperty] public string direccion { get; set; } = "";
         [BindProperty] public string telefono { get; set; } = "";
+        [BindProperty] public string email { get; set; } = "";
+        [BindProperty] public bool activo { get; set; } 
         public string Mensaje { get; set; } = "";
         public void OnGet()
         {
@@ -36,9 +39,13 @@ namespace Alquiler_Eventos.Pages.PageCliente
                 {
                     throw new Exception("Debe ingresar el Nombre del Cliente");
                 }
-                if (Request.Form["apellido"] == "")
+                if (Request.Form["tipo"] == "")
                 {
-                    throw new Exception("Debe ingresar el Apellido del Cliente");
+                    throw new Exception("Debe ingresar el Tipo del Cliente");
+                }
+                if (Request.Form["documento"] == "")
+                {
+                    throw new Exception("Debe ingresar el Documento del Cliente");
                 }
                 if (Request.Form["direccion"] == "")
                 {
@@ -48,15 +55,22 @@ namespace Alquiler_Eventos.Pages.PageCliente
                 {
                     throw new Exception("Debe ingresar el Teléfono del Cliente");
                 }
+                if (Request.Form["email"] == "")
+                {
+                    throw new Exception("Debe ingresar el Email del Cliente");
+                }
                 
 
                 int Id = int.Parse(Request.Form["id"]);
                 string Nombre = Request.Form["nombre"];
-                string Apellido = Request.Form["apellido"];
+                string Tipo = Request.Form["tipo"];
+                string Documento = Request.Form["documento"];
                 string Direccion = Request.Form["direccion"];
                 string Telefono = Request.Form["telefono"];
+                string Email = Request.Form["email"];
+                bool Activo = Request.Form["activo"] == "on";
 
-                Cliente unCliente = new Cliente(Id, Nombre, Apellido, Direccion, Telefono);
+                Cliente unCliente = new Cliente(Id, Nombre, Tipo, Documento, Direccion, Telefono, Email, Activo);
 
                 Controladora unaControladora = new Controladora();
 
